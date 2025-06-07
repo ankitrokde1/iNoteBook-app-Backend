@@ -70,7 +70,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign(data, JWT_SECRET, { expiresIn: "7d" });
     res.cookie("token", token, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       sameSite: "Lax",
       maxAge: ONE_WEEK,
     });
@@ -104,7 +104,7 @@ exports.logout = (req, res) => {
   }
   res.clearCookie("token", {
     httpOnly: true,
-    secure: false,
+    secure: true,
     sameSite: "Lax",
   });
   res.status(200).json({ message: "Logged out successfully" });

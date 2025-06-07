@@ -68,9 +68,6 @@ exports.login = async (req, res) => {
       },
     };
     const token = jwt.sign(data, JWT_SECRET, { expiresIn: "7d" });
-    console.log("Generated Token:", token);
-    // Set the token in a cookie
-
     res.cookie("token", token, {
       httpOnly: true,
       // secure: false,

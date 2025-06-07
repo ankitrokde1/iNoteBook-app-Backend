@@ -33,7 +33,7 @@ It provides authentication, note management, and password reset functionality.
    ```
 
 3. **Configure environment variables:**
-   - Copy `.env.example` to `.env` and fill in your values.
+   -  fill `.env` variables in your values.
 
 4. **Start the server:**
    ```sh

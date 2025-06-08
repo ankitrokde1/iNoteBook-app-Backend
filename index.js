@@ -22,6 +22,27 @@ const port = process.env.PORT || 5000;
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/notes", require("./routes/notes"));
 
+// ...existing code...
+
+// Global error handler middleware
+app.use((err, req, res, next) => {
+  console.error("Global error:", err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
+});
+
+// Handle uncaught exceptions
+process.on("uncaughtException", (err) => {
+  console.error("Uncaught Exception:", err);
+  process.exit(1); // Render will restart the service
+});
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection:", reason);
+  process.exit(1); // Render will restart the service
+});
+
+
 app.listen(port, () => {
   console.log(`iNoteBook backend listening at port: ${port}`);
 });

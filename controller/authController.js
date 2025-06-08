@@ -70,8 +70,8 @@ exports.login = async (req, res) => {
     const token = jwt.sign(data, JWT_SECRET, { expiresIn: "7d" });
     res.cookie("token", token, {
       httpOnly: true,
-      // secure: false,
-      sameSite: "Strict",
+      secure: true,
+      sameSite: "None",
       maxAge: ONE_WEEK,
     });
     success = true;
@@ -102,7 +102,11 @@ exports.logout = (req, res) => {
   if (!req.cookies.token) {
     return res.status(400).json({ error: "User is not logged in" });
   }
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true,
+    sameSite: "None",
+  });
   res.status(200).json({ message: "Logged out successfully" });
 };
 

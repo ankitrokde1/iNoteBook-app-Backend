@@ -128,32 +128,35 @@ exports.forgotPassword = async (req, res) => {
 
     const resetLink = `${process.env.REACT_APP_API_URL}/reset-password/${token}`;
     const html = `
-  <div style="font-family: Arial, sans-serif; background: #f8fafc; padding: 32px 0;">
-    <div style="max-width: 480px; margin: auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 12px #0001; padding: 32px;">
-      <div style="text-align: center;">
-        <img src="https://img.icons8.com/color/96/000000/lock--v2.png" alt="Reset Password" style="margin-bottom: 16px;" />
-        <h2 style="color: #2563eb; margin-bottom: 8px;">Reset Your Password</h2>
-      </div>
-      <p style="font-size: 16px; color: #333; margin-bottom: 24px;">
-        We received a request to reset your iNoteBook password.<br>
-        Click the button below to set a new password. This link is valid for <b>15 minutes</b>.
-      </p>
-      <div style="text-align: center; margin-bottom: 24px;">
-        <a href="${resetLink}" style="background: linear-gradient(90deg,#2563eb,#1e40af); color: #fff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-size: 16px; font-weight: bold; display: inline-block;">
-          Reset Password
-        </a>
-      </div>
-      <p style="font-size: 14px; color: #666;">
-        If you did not request a password reset, you can safely ignore this email.<br>
-        For your security, this link will expire soon.
-      </p>
-      <hr style="margin: 32px 0 16px 0; border: none; border-top: 1px solid #eee;">
-      <div style="text-align: center; font-size: 13px; color: #aaa;">
-        &copy; ${new Date().getFullYear()} iNoteBook by Ankit Rokde. All rights reserved.
+    <div style="font-family: Arial, sans-serif; background: #f8fafc; padding: 32px 0;">
+      <div style="max-width: 480px; margin: auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 12px #0001; padding: 32px;">
+        <div style="text-align: center;">
+          <img src="https://img.icons8.com/color/96/000000/lock--v2.png" alt="Reset Password" style="margin-bottom: 16px;" />
+          <h2 style="color: #2563eb; margin-bottom: 8px;">Reset Your Password</h2>
+        </div>
+        <p style="font-size: 16px; color: #333; margin-bottom: 24px;">
+          We received a request to reset your iNoteBook password.<br>
+          Click the button below to set a new password. This link is valid for <b>15 minutes</b>.
+        </p>
+        <div style="text-align: center; margin-bottom: 24px;">
+          <a href="${resetLink}" style="background: linear-gradient(90deg,#2563eb,#1e40af); color: #fff; padding: 12px 32px; border-radius: 6px; text-decoration: none; font-size: 16px; font-weight: bold; display: inline-block;">
+            Reset Password
+          </a>
+        </div>
+        <p style="font-size: 15px; color: #2563eb; text-align: center; margin-bottom: 24px;">
+          Or <a href="${resetLink}" style="color: #1e40af; text-decoration: underline;">click here</a> if the button doesn't work.
+        </p>
+        <p style="font-size: 14px; color: #666;">
+          If you did not request a password reset, you can safely ignore this email.<br>
+          For your security, this link will expire soon.
+        </p>
+        <hr style="margin: 32px 0 16px 0; border: none; border-top: 1px solid #eee;">
+        <div style="text-align: center; font-size: 13px; color: #aaa;">
+          &copy; ${new Date().getFullYear()} iNoteBook by Ankit Rokde. All rights reserved.
+        </div>
       </div>
     </div>
-  </div>
-`;
+  `;
 
     await sendEmail(user.email, "Reset your iNoteBook password", html);
 

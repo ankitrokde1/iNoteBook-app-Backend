@@ -5,9 +5,22 @@ const app = express();
 const cookieParser = require("cookie-parser");
 var cors = require("cors");
 
+const allowedOrigins = [
+  process.env.REACT_APP_API_URL, // ✅ Your web frontend (from .env)
+  "https://localhost", // ✅ Android WebView
+  "capacitor://localhost", // ✅ Capacitor app scheme
+];
+
 app.use(
   cors({
-    origin: process.env.REACT_APP_API_URL,
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        console.log("Blocked by CORS:", origin);
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
     credentials: true,
   })
 );
